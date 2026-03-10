@@ -1,128 +1,303 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Metodologias Ágeis</title>
+<meta charset="UTF-8">
+<title>Metodologias Ágeis</title>
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 40px;
-            background-color: #f4f6f8;
-        }
+<!-- Tailwind + DaisyUI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        h2 {
-            color: #34495e;
-        }
-
-        p {
-            text-align: justify;
-        }
-
-        img {
-            display: block;
-            margin: 20px auto;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 70%;
-            margin: 20px auto;
-            background-color: white;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #2c3e50;
-            color: white;
-        }
-
-        a {
-            color: #2980b9;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        hr {
-            width: 60%;
-            margin: 30px auto;
-        }
-    </style>
 </head>
 
-<body>
+<body class="bg-base-200 p-10">
 
-    <h1>Metodologias Ágeis</h1>
+<div class="max-w-6xl mx-auto">
 
-    <p>
-        As metodologias ágeis são formas modernas de organizar projetos, 
-        principalmente na área de tecnologia. Elas ajudam as equipes a 
-        trabalharem de forma mais rápida, organizada e colaborativa.
-    </p>
+<h1 class="text-4xl font-bold text-center mb-6">
+Metodologias Ágeis
+</h1>
 
-    <hr>
+<div class="text-lg text-justify mb-10">
 
-    <h2>Scrum</h2>
+<p class="mb-4">
+As metodologias ágeis são abordagens modernas utilizadas para organizar e
+gerenciar projetos, principalmente na área de desenvolvimento de software.
+Essas metodologias surgiram como uma alternativa aos métodos tradicionais,
+que eram mais rígidos e demorados.
+</p>
 
-    <p>
-        O Scrum é um framework ágil que organiza o trabalho em ciclos 
-        chamados <strong>Sprints</strong>. Cada Sprint tem um período 
-        definido e ao final é entregue uma parte do projeto.
-    </p>
+<p class="mb-4">
+O principal objetivo das metodologias ágeis é tornar o desenvolvimento de
+projetos mais flexível, colaborativo e eficiente. Em vez de planejar tudo
+no início do projeto, as equipes trabalham em pequenas entregas contínuas,
+permitindo ajustes rápidos conforme as necessidades do cliente.
+</p>
 
-    <p>
-        Para saber mais sobre Scrum, visite o site oficial:
-        <a href="https://www.scrum.org" target="_blank">
-            www.scrum.org
-        </a>
-    </p>
+<p>
+As metodologias ágeis valorizam a comunicação constante entre os membros
+da equipe, a adaptação às mudanças e a entrega frequente de resultados.
+</p>
 
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Scrum_process.svg"
-         alt="Processo do Scrum"
-         width="400">
+</div>
 
-    <hr>
 
-    <h2>Comparação entre Scrum e Kanban</h2>
+<!-- ABAS -->
+<div role="tablist" class="tabs tabs-boxed">
 
-    <table>
-        <tr>
-            <th>Critério</th>
-            <th>Scrum</th>
-            <th>Kanban</th>
-        </tr>
+<a role="tab" class="tab tab-active">Scrum</a>
+<a role="tab" class="tab">Kanban</a>
+<a role="tab" class="tab">Manifesto Ágil</a>
+<a role="tab" class="tab">Vantagens</a>
 
-        <tr>
-            <td>Modelo de Trabalho</td>
-            <td>Trabalho em Sprints</td>
-            <td>Fluxo contínuo</td>
-        </tr>
+</div>
 
-        <tr>
-            <td>Planejamento</td>
-            <td>Planejado no início da Sprint</td>
-            <td>Planejamento contínuo</td>
-        </tr>
 
-        <tr>
-            <td>Organização</td>
-            <td>Backlog e reuniões fixas</td>
-            <td>Quadro visual com colunas</td>
-        </tr>
-    </table>
+<!-- SCRUM -->
+
+<div class="mt-8">
+
+<div class="card bg-base-100 shadow-xl">
+
+<div class="card-body">
+
+<h2 class="card-title text-2xl">
+Scrum
+</h2>
+
+<p>
+O Scrum é um dos frameworks ágeis mais utilizados no mundo. Ele organiza
+o trabalho em ciclos chamados <b>Sprints</b>, que geralmente duram de
+uma a quatro semanas.
+</p>
+
+<p>
+Durante cada Sprint, a equipe trabalha em um conjunto específico de
+tarefas que fazem parte do chamado <b>Product Backlog</b>, que é uma lista
+priorizada de funcionalidades e melhorias do projeto.
+</p>
+
+<p>
+Ao final de cada Sprint, a equipe apresenta uma nova parte do produto
+funcionando. Isso permite que o cliente acompanhe o progresso e forneça
+feedback constante.
+</p>
+
+<img class="rounded-xl mt-4"
+src="https://upload.wikimedia.org/wikipedia/commons/5/58/Scrum_process.svg">
+
+<div class="mt-4">
+
+<p>
+Para saber mais sobre Scrum, visite o site oficial:
+<a class="link link-primary" href="https://www.scrum.org" target="_blank">
+www.scrum.org
+</a>
+</p>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- CARDS COM CONCEITOS -->
+
+<h2 class="text-2xl font-bold mt-12 mb-6 text-center">
+Papéis no Scrum
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card bg-base-100 shadow-lg">
+<div class="card-body">
+<h3 class="card-title">Product Owner</h3>
+<p>
+Responsável por definir as prioridades do produto e garantir que
+a equipe esteja desenvolvendo as funcionalidades mais importantes
+para o cliente.
+</p>
+</div>
+</div>
+
+<div class="card bg-base-100 shadow-lg">
+<div class="card-body">
+<h3 class="card-title">Scrum Master</h3>
+<p>
+O Scrum Master ajuda a equipe a seguir as práticas do Scrum,
+removendo obstáculos e garantindo que o processo funcione
+corretamente.
+</p>
+</div>
+</div>
+
+<div class="card bg-base-100 shadow-lg">
+<div class="card-body">
+<h3 class="card-title">Equipe de Desenvolvimento</h3>
+<p>
+Grupo responsável por construir o produto. Normalmente é composto
+por desenvolvedores, designers e outros profissionais técnicos.
+</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- KANBAN -->
+
+<h2 class="text-2xl font-bold mt-14 mb-6 text-center">
+Kanban
+</h2>
+
+<div class="card bg-base-100 shadow-xl">
+
+<div class="card-body">
+
+<p>
+O Kanban é outra metodologia ágil muito popular. Diferente do Scrum,
+ele não utiliza ciclos fixos chamados Sprints. Em vez disso, o trabalho
+é organizado em um fluxo contínuo.
+</p>
+
+<p>
+A principal ferramenta do Kanban é o <b>quadro Kanban</b>, que mostra
+visualmentes as tarefas em diferentes etapas do processo, como:
+</p>
+
+<ul class="list-disc ml-6">
+<li>A fazer</li>
+<li>Em andamento</li>
+<li>Concluído</li>
+</ul>
+
+<p>
+Isso permite que toda a equipe visualize o progresso do trabalho e
+identifique possíveis gargalos no processo.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TABELA -->
+
+<h2 class="text-2xl font-bold mt-14 mb-6 text-center">
+Comparação entre Scrum e Kanban
+</h2>
+
+<div class="overflow-x-auto">
+
+<table class="table table-zebra">
+
+<thead>
+<tr>
+<th>Critério</th>
+<th>Scrum</th>
+<th>Kanban</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Modelo de Trabalho</td>
+<td>Trabalho em Sprints</td>
+<td>Fluxo contínuo</td>
+</tr>
+
+<tr>
+<td>Planejamento</td>
+<td>Planejamento no início da Sprint</td>
+<td>Planejamento contínuo</td>
+</tr>
+
+<tr>
+<td>Organização</td>
+<td>Backlog e reuniões fixas</td>
+<td>Quadro visual</td>
+</tr>
+
+<tr>
+<td>Flexibilidade</td>
+<td>Mudanças durante a Sprint são limitadas</td>
+<td>Mudanças podem ocorrer a qualquer momento</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- MANIFESTO AGIL -->
+
+<h2 class="text-2xl font-bold mt-14 mb-6 text-center">
+Manifesto Ágil
+</h2>
+
+<div class="alert alert-info shadow-lg">
+
+<div>
+
+<span>
+O Manifesto Ágil foi criado em 2001 e define quatro valores principais:
+</span>
+
+<ul class="list-disc ml-6 mt-2">
+
+<li>Indivíduos e interações mais que processos e ferramentas</li>
+<li>Software funcionando mais que documentação extensa</li>
+<li>Colaboração com o cliente mais que negociação de contratos</li>
+<li>Responder a mudanças mais que seguir um plano rígido</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- VANTAGENS -->
+
+<h2 class="text-2xl font-bold mt-14 mb-6 text-center">
+Vantagens das Metodologias Ágeis
+</h2>
+
+<div class="grid md:grid-cols-2 gap-6">
+
+<div class="alert alert-success">
+Maior rapidez na entrega de resultados.
+</div>
+
+<div class="alert alert-success">
+Maior adaptação a mudanças.
+</div>
+
+<div class="alert alert-success">
+Melhor comunicação entre equipes.
+</div>
+
+<div class="alert alert-success">
+Maior satisfação do cliente.
+</div>
+
+</div>
+
+
+<footer class="text-center mt-16 opacity-70">
+
+<p>
+Página educativa sobre metodologias ágeis.
+</p>
+
+</footer>
+
+</div>
 
 </body>
 </html>
