@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="cupcake">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Curiosidades e fatos históricos da Ciência da Computação">
+    <meta name="author" content="Portal Computação">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo Confuso da Computação</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Ajuste de profundidade para o Bootstrap não sobrepor o menu do DaisyUI */
+        .modal { z-index: 1060; }
+        .modal-backdrop { z-index: 1050; }
+    </style>
+</head>
+
+<body class="bg-base-200 min-h-screen font-sans">
+
+<div class="sticky top-0 z-[100] p-4 flex justify-end bg-base-100/80 backdrop-blur shadow-sm">
+    <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-outline btn-primary m-1">
+            Mudar Tema
+            <svg width="12px" height="12px" class="inline-block h-2 w-2 fill-current opacity-60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 346l128 128-640 640V141l-128-128-128 128v873L391 346l-128 128 640 640H31l-128 128 128 128h873l-640 640 128 128 640-640v873l128 128 128-128v-873l640 640 128-128-640-640h873l128-128-128-128h-873l640-640z"></path></svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl mt-4 max-h-96 overflow-y-auto">
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Default" value="default"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk" value="cyberpunk"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Coffee" value="coffee"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night"/></li>
+        </ul>
+    </div>
+</div>
+
+<div id="pagina" class="container mx-auto max-w-5xl p-4 md:p-8 space-y-16">
+
+    <header id="topo" class="text-center py-10 space-y-4">
+        <h1 class="text-5xl font-black text-primary tracking-tight italic">Arquivo (Quase) Perdido da Ciência da Computação</h1>
+        <p class="text-xl opacity-70 border-y border-primary/20 py-2 inline-block">Uma coletânea caótica de fatos históricos, curiosos e inesperados.</p>
+    </header>
+
+    <nav id="menu-principal" class="navbar bg-base-100 rounded-box shadow-lg sticky top-20 z-[90]">
+        <ul class="menu menu-horizontal w-full justify-around font-bold">
+            <li><a href="#pioneiros">Pioneiros</a></li>
+            <li><a href="#bugs">Bugs</a></li>
+            <li><a href="#internet">Internet</a></li>
+            <li><a href="#linguagens">Linguagens</a></li>
+            <li><a href="#linha-do-tempo">Linha do Tempo</a></li>
+            <li><a href="#formulario">Envie Algo</a></li>
+        </ul>
+    </nav>
+
+    <div class="card bg-base-100 p-6 shadow-xl border border-base-300">
+        <h3 class="text-lg font-bold mb-3">Progresso da sua imersão histórica:</h3>
+        <div class="progress" role="progressbar" aria-label="Exemplo com listras" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="height: 25px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" style="width: 45%">45% Carregado</div>
+        </div>
+    </div>
+
+    <main class="space-y-24">
+
+        <section id="pioneiros" class="space-y-8">
+            <h2 class="text-3xl font-bold border-l-4 border-primary pl-4 uppercase">Pioneiros Esquecidos</h2>
+            
+            <div class="alert alert-info alert-dismissible fade show shadow-md" role="alert">
+                <strong>Dica Histórica:</strong> Sabia que Ada Lovelace era filha do poeta Lord Byron?
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="card bg-base-100 shadow-xl border border-base-300">
+                    <div class="card-body">
+                        <h3 class="card-title text-2xl">Ada Lovelace</h3>
+                        <p>Considerada a primeira programadora da história.</p>
+                        
+                        <button type="button" class="btn btn-outline btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#modalAda">
+                            Mais Detalhes (via Bootstrap)
+                        </button>
+                    </div>
+                </article>
+
+                <article class="card bg-primary text-primary-content shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title text-2xl">Alan Turing</h3>
+                        <p>Criador do conceito de Máquina de Turing.</p>
+                        <blockquote class="italic border-l-2 border-primary-content/50 pl-4 py-2 mt-2">
+                            "Podemos ver apenas um pouco do futuro, mas o suficiente para perceber que há muito a fazer."
+                        </blockquote>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="bugs" class="space-y-8">
+            <h2 class="text-3xl font-bold border-l-4 border-secondary pl-4 uppercase">Histórias de Bugs</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="card bg-base-100 shadow-md border-t-4 border-secondary">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl">O Primeiro Bug Real</h3>
+                        <p>Uma mariposa encontrada em um computador em 1947.</p>
+                    </div>
+                </article>
+
+                <article class="card bg-neutral text-neutral-content shadow-md">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl text-secondary">O Vírus Creeper</h3>
+                        <p>Primeiro vírus da história (1971).</p>
+                        <pre class="mockup-code bg-black text-success mt-2"><code>I'M THE CREEPER : CATCH ME IF YOU CAN</code></pre>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="internet" class="space-y-8">
+            <h2 class="text-3xl font-bold border-l-4 border-accent pl-4 uppercase">Curiosidades da Internet</h2>
+            <div class="flex flex-wrap gap-4">
+                <article class="card bg-base-100 shadow-xl flex-grow border border-base-300">
+                    <div class="card-body">
+                        <h3 class="card-title">Primeiro Website</h3>
+                        <p>Criado em 1991 por Tim Berners-Lee.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="formulario" class="card bg-neutral text-neutral-content p-6 shadow-2xl">
+            <h2 class="text-3xl font-bold mb-6 text-center">Envie sua Curiosidade</h2>
+            <form class="space-y-4">
+                <fieldset class="fieldset p-4 border border-neutral-content/20 rounded-box">
+                    <legend class="fieldset-legend text-accent">Informações</legend>
+                    <input type="text" placeholder="Nome" class="input input-bordered w-full mb-2">
+                    <input type="submit" value="Enviar" class="btn btn-accent mt-4 w-full">
+                </fieldset>
+            </form>
+        </section>
+
+    </main>
+</div>
+
+<div class="modal fade" id="modalAda" tabindex="-1" aria-labelledby="modalAdaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-base-100">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title font-bold text-xl" id="modalAdaLabel">O Legado de Ada</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Ela não apenas escreveu o primeiro algoritmo, mas previu que os computadores poderiam criar música e arte, não apenas processar números!
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
