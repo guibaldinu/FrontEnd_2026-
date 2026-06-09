@@ -1,0 +1,1203 @@
+// ATIVIDADADE 1
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de CPF</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .valido {
+            color: green;
+        }
+
+        .invalido {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Validador de CPF</h1>
+
+    <input type="text" id="cpf" placeholder="Digite o CPF">
+    <button onclick="validarCPF()">Validar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function validarCPF() {
+            let cpf = document.getElementById("cpf").value;
+
+            // Remove pontos, traços e espaços
+            cpf = cpf.replace(/\D/g, '');
+
+            const resultado = document.getElementById("resultado");
+
+            // Verifica tamanho
+            if (cpf.length !== 11) {
+                mostrarResultado(false);
+                return;
+            }
+
+            // Impede CPFs com todos os números iguais
+            if (/^(\d)\1+$/.test(cpf)) {
+                mostrarResultado(false);
+                return;
+            }
+
+            // Cálculo do 1º dígito verificador
+            let soma = 0;
+            for (let i = 0; i < 9; i++) {
+                soma += parseInt(cpf.charAt(i)) * (10 - i);
+            }
+
+            let digito1 = (soma * 10) % 11;
+            if (digito1 === 10) digito1 = 0;
+
+            // Cálculo do 2º dígito verificador
+            soma = 0;
+            for (let i = 0; i < 10; i++) {
+                soma += parseInt(cpf.charAt(i)) * (11 - i);
+            }
+
+            let digito2 = (soma * 10) % 11;
+            if (digito2 === 10) digito2 = 0;
+
+            // Validação final
+            const cpfValido =
+                digito1 === parseInt(cpf.charAt(9)) &&
+                digito2 === parseInt(cpf.charAt(10));
+
+            mostrarResultado(cpfValido);
+        }
+
+        function mostrarResultado(valido) {
+            const resultado = document.getElementById("resultado");
+
+            if (valido) {
+                resultado.textContent = "CPF Válido";
+                resultado.className = "valido";
+            } else {
+                resultado.textContent = "CPF Inválido";
+                resultado.className = "invalido";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+//ATIVIDADE 2 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de Temperatura</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+
+<h1>Conversor de Temperatura</h1>
+
+<div class="container">
+    <label for="celsius">Celsius (°C)</label>
+    <input type="number" id="celsius" step="0.1">
+
+    <label for="fahrenheit">Fahrenheit (°F)</label>
+    <input type="number" id="fahrenheit" step="0.1">
+</div>
+
+<script>
+    const celsiusInput = document.getElementById("celsius");
+    const fahrenheitInput = document.getElementById("fahrenheit");
+
+    let atualizando = false;
+
+    celsiusInput.addEventListener("input", () => {
+        if (atualizando) return;
+
+        atualizando = true;
+
+        const celsius = parseFloat(celsiusInput.value);
+
+        if (!isNaN(celsius)) {
+            const fahrenheit = (celsius * 9 / 5) + 32;
+            fahrenheitInput.value = fahrenheit.toFixed(2);
+        } else {
+            fahrenheitInput.value = "";
+        }
+
+        atualizando = false;
+    });
+
+    fahrenheitInput.addEventListener("input", () => {
+        if (atualizando) return;
+
+        atualizando = true;
+
+        const fahrenheit = parseFloat(fahrenheitInput.value);
+
+        if (!isNaN(fahrenheit)) {
+            const celsius = (fahrenheit - 32) * 5 / 9;
+            celsiusInput.value = celsius.toFixed(2);
+        } else {
+            celsiusInput.value = "";
+        }
+
+        atualizando = false;
+    });
+</script>
+
+</body>
+</html>
+
+//ATIVIDADE 3 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Média Escolar</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        width: 350px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        background-color: #333;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    #resultado {
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .aprovado {
+        color: blue;
+    }
+
+    .exame {
+        color: green;
+    }
+
+    .reprovado {
+        color: red;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Média Escolar</h2>
+
+    <label for="nome">Nome do Aluno</label>
+    <input type="text" id="nome">
+
+    <label for="nota1">Nota 1</label>
+    <input type="number" id="nota1" min="0" max="10" step="0.1">
+
+    <label for="nota2">Nota 2</label>
+    <input type="number" id="nota2" min="0" max="10" step="0.1">
+
+    <label for="nota3">Nota 3</label>
+    <input type="number" id="nota3" min="0" max="10" step="0.1">
+
+    <button id="calcular">Calcular Média</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+    const botao = document.getElementById("calcular");
+
+    botao.addEventListener("click", () => {
+
+        const nome = document.getElementById("nome").value;
+
+        const nota1 = Number(document.getElementById("nota1").value);
+        const nota2 = Number(document.getElementById("nota2").value);
+        const nota3 = Number(document.getElementById("nota3").value);
+
+        const media = (nota1 + nota2 + nota3) / 3;
+
+        const resultado = document.getElementById("resultado");
+
+        if (media >= 7) {
+            resultado.className = "aprovado";
+            resultado.innerHTML = `
+                Aluno: ${nome}<br>
+                Média: ${media.toFixed(2)}<br>
+                Situação: APROVADO
+            `;
+        }
+        else if (media >= 4) {
+            const falta = (10 - media).toFixed(2);
+
+            resultado.className = "exame";
+            resultado.innerHTML = `
+                Aluno: ${nome}<br>
+                Média: ${media.toFixed(2)}<br>
+                Situação: EXAME<br>
+                Faltam ${falta} pontos para atingir nota 10.
+            `;
+        }
+        else {
+            resultado.className = "reprovado";
+            resultado.innerHTML = `
+                Aluno: ${nome}<br>
+                Média: ${media.toFixed(2)}<br>
+                Situação: REPROVADO
+            `;
+        }
+    });
+</script>
+
+</body>
+</html>
+
+// ATIVIDADE 4 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinity Bank - Simulador de Vendas</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#f4f4f4;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+    }
+
+    .container{
+        background:white;
+        padding:25px;
+        border-radius:10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.2);
+        width:400px;
+    }
+
+    h2{
+        text-align:center;
+        color:#333;
+    }
+
+    label{
+        display:block;
+        margin-top:10px;
+        font-weight:bold;
+    }
+
+    input, select{
+        width:100%;
+        padding:8px;
+        margin-top:5px;
+        box-sizing:border-box;
+    }
+
+    button{
+        width:100%;
+        padding:10px;
+        margin-top:20px;
+        background:#007bff;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        font-size:16px;
+    }
+
+    button:hover{
+        background:#0056b3;
+    }
+
+    #resultado{
+        margin-top:20px;
+        padding:15px;
+        border-radius:5px;
+        background:#f8f9fa;
+        line-height:1.8;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>💳 Infinity Bank</h2>
+
+    <label>Bandeira</label>
+    <select id="bandeira">
+        <option value="visa">Visa</option>
+        <option value="master">Master</option>
+        <option value="elo">Elo</option>
+    </select>
+
+    <label>Valor da Compra (R$)</label>
+    <input type="number" id="valor" min="0" step="0.01">
+
+    <label>Número de Parcelas</label>
+    <input type="number" id="parcelas" min="1" max="24">
+
+    <button id="simular">Simular Venda</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+
+document.getElementById("simular").addEventListener("click", () => {
+
+    const bandeira = document.getElementById("bandeira").value;
+    const valor = Number(document.getElementById("valor").value);
+    const parcelas = Number(document.getElementById("parcelas").value);
+
+    let taxaPercentual = 0;
+
+    switch(bandeira){
+        case "visa":
+            taxaPercentual = 0.02;
+            break;
+
+        case "master":
+            taxaPercentual = 0.0185;
+            break;
+
+        case "elo":
+            taxaPercentual = 0.03;
+            break;
+    }
+
+    // Taxa da bandeira
+    const valorTaxa = valor * taxaPercentual;
+
+    // Juros simples (0,35% ao mês)
+    const valorJuros = valor * (0.0035 * parcelas);
+
+    // Taxa fixa mensal
+    const taxaMensal = 12.50 * parcelas;
+
+    // Valor total
+    const valorFinal = valor + valorTaxa + valorJuros + taxaMensal;
+
+    // Valor da parcela
+    const valorParcela = valorFinal / parcelas;
+
+    document.getElementById("resultado").innerHTML = `
+        <strong>Resumo da Simulação</strong><br>
+
+        Valor da Compra: R$ ${valor.toFixed(2)}<br>
+
+        Taxa da Bandeira: R$ ${valorTaxa.toFixed(2)}<br>
+
+        Juros Totais: R$ ${valorJuros.toFixed(2)}<br>
+
+        Taxa Mensal Acumulada: R$ ${taxaMensal.toFixed(2)}<br>
+
+        Valor Total: R$ ${valorFinal.toFixed(2)}<br>
+
+        Valor de Cada Parcela: <strong>R$ ${valorParcela.toFixed(2)}</strong>
+    `;
+});
+
+</script>
+
+</body>
+</html>
+
+//ATIVIDADE 5 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinity Bank - Lista de Convidados VIP</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#f4f6f9;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+    }
+
+    .card{
+        width:700px;
+        background:white;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+        text-align:center;
+        color:#003366;
+        margin-bottom:20px;
+    }
+
+    .entrada{
+        display:flex;
+        gap:10px;
+        margin-bottom:20px;
+    }
+
+    input{
+        flex:1;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:16px;
+    }
+
+    button{
+        border:none;
+        padding:8px 12px;
+        border-radius:5px;
+        cursor:pointer;
+        color:white;
+        font-weight:bold;
+    }
+
+    #btnAdicionar{
+        background:#007bff;
+    }
+
+    .btn-concluir{
+        background:#28a745;
+    }
+
+    .btn-editar{
+        background:#ffc107;
+        color:black;
+    }
+
+    .btn-excluir{
+        background:#dc3545;
+    }
+
+    ul{
+        list-style:none;
+    }
+
+    li{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:12px 5px;
+        border-bottom:1px solid #e0e0e0;
+    }
+
+    .nome{
+        flex:1;
+        font-size:16px;
+    }
+
+    .acoes{
+        display:flex;
+        gap:8px;
+    }
+
+    .classe-riscado{
+        text-decoration: line-through;
+        color: gray;
+        opacity:0.7;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1>👥 Infinity Bank - Convidados VIP</h1>
+
+    <div class="entrada">
+        <input type="text" id="nomeConvidado" placeholder="Digite o nome do convidado">
+        <button id="btnAdicionar">Adicionar</button>
+    </div>
+
+    <ul id="listaConvidados"></ul>
+
+</div>
+
+<script>
+
+const convidados = [];
+
+const inputNome = document.getElementById("nomeConvidado");
+const btnAdicionar = document.getElementById("btnAdicionar");
+const lista = document.getElementById("listaConvidados");
+
+btnAdicionar.addEventListener("click", adicionarConvidado);
+
+function adicionarConvidado(){
+
+    const nome = inputNome.value.trim();
+
+    if(nome === ""){
+        alert("Digite um nome válido!");
+        return;
+    }
+
+    convidados.push(nome);
+
+    renderizarLista();
+
+    inputNome.value = "";
+    inputNome.focus();
+}
+
+function renderizarLista(){
+
+    lista.innerHTML = "";
+
+    convidados.forEach((convidado, indice) => {
+
+        const li = document.createElement("li");
+
+        const spanNome = document.createElement("span");
+        spanNome.className = "nome";
+        spanNome.textContent = convidado;
+
+        const divAcoes = document.createElement("div");
+        divAcoes.className = "acoes";
+
+        // Botão Concluir
+        const btnConcluir = document.createElement("button");
+        btnConcluir.textContent = "Concluir";
+        btnConcluir.className = "btn-concluir";
+
+        btnConcluir.addEventListener("click", () => {
+            spanNome.classList.toggle("classe-riscado");
+        });
+
+        // Botão Editar
+        const btnEditar = document.createElement("button");
+        btnEditar.textContent = "Editar";
+        btnEditar.className = "btn-editar";
+
+        btnEditar.addEventListener("click", () => {
+
+            const novoNome = prompt(
+                "Editar nome do convidado:",
+                convidados[indice]
+            );
+
+            if(novoNome !== null && novoNome.trim() !== ""){
+                convidados[indice] = novoNome.trim();
+                renderizarLista();
+            }
+        });
+
+        // Botão Excluir
+        const btnExcluir = document.createElement("button");
+        btnExcluir.textContent = "Excluir";
+        btnExcluir.className = "btn-excluir";
+
+        btnExcluir.addEventListener("click", () => {
+
+            convidados.splice(indice, 1);
+
+            renderizarLista();
+        });
+
+        divAcoes.appendChild(btnConcluir);
+        divAcoes.appendChild(btnEditar);
+        divAcoes.appendChild(btnExcluir);
+
+        li.appendChild(spanNome);
+        li.appendChild(divAcoes);
+
+        lista.appendChild(li);
+    });
+}
+
+</script>
+
+</body>
+</html>
+
+// ATIVIDADE 6 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinity Bank - Crédito para Eventos</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#f4f6f9;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+    }
+
+    .card{
+        width:450px;
+        background:white;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    h1{
+        text-align:center;
+        color:#003366;
+        margin-bottom:20px;
+    }
+
+    label{
+        display:block;
+        margin-top:12px;
+        margin-bottom:5px;
+        font-weight:bold;
+    }
+
+    select,
+    input{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:6px;
+    }
+
+    button{
+        width:100%;
+        margin-top:20px;
+        padding:12px;
+        border:none;
+        border-radius:6px;
+        background:#0066cc;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:#004fa3;
+    }
+
+    .resultado{
+        margin-top:20px;
+        padding:15px;
+        background:#f8f9fa;
+        border-radius:8px;
+        line-height:1.8;
+        border-left:4px solid #0066cc;
+    }
+
+    .total{
+        font-size:20px;
+        font-weight:bold;
+        color:#008000;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1>🎉 Crédito para Eventos</h1>
+
+    <label for="pacote">Pacote</label>
+    <select id="pacote">
+        <option value="50">Standard - R$ 50,00 por pessoa</option>
+        <option value="80">Premium - R$ 80,00 por pessoa</option>
+        <option value="120">Infinity Deluxe - R$ 120,00 por pessoa</option>
+    </select>
+
+    <label for="pessoas">Quantidade de Pessoas</label>
+    <input type="number" id="pessoas" min="1">
+
+    <button id="calcular">Calcular Orçamento</button>
+
+    <div id="resultado" class="resultado"></div>
+
+</div>
+
+<script>
+
+const btnCalcular = document.getElementById("calcular");
+
+btnCalcular.addEventListener("click", () => {
+
+    const valorPacote = Number(document.getElementById("pacote").value);
+    const quantidadePessoas = Number(document.getElementById("pessoas").value);
+
+    if(quantidadePessoas <= 0 || isNaN(quantidadePessoas)){
+        alert("Informe uma quantidade válida de convidados.");
+        return;
+    }
+
+    // 1. Cálculo Base
+    const custoBruto = valorPacote * quantidadePessoas;
+
+    // 2. Taxa de Serviço (10%)
+    const taxaServico = custoBruto * 0.10;
+
+    const subtotal = custoBruto + taxaServico;
+
+    // 3. Desconto Fidelidade (5%)
+    let desconto = 0;
+
+    if(quantidadePessoas > 100){
+        desconto = subtotal * 0.05;
+    }
+
+    // Total Final
+    const totalFinal = subtotal - desconto;
+
+    document.getElementById("resultado").innerHTML = `
+        <strong>Resumo do Orçamento</strong><br><br>
+
+        👥 Convidados: ${quantidadePessoas}<br>
+
+        💰 Custo Bruto: R$ ${custoBruto.toFixed(2)}<br>
+
+        📋 Taxa de Serviço (10%): R$ ${taxaServico.toFixed(2)}<br>
+
+        🎁 Desconto Aplicado: R$ ${desconto.toFixed(2)}<br>
+
+        <hr style="margin:10px 0">
+
+        <div class="total">
+            Total Final: R$ ${totalFinal.toFixed(2)}
+        </div>
+    `;
+});
+
+</script>
+
+</body>
+</html>
+
+// ATIVIDADE 7 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛡️ Validador de Segurança Infinity</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:550px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#003366;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#0056b3;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#003f88;
+}
+
+.painel{
+    margin-top:20px;
+    padding:15px;
+    border-radius:8px;
+    background:#f8f9fa;
+    line-height:1.8;
+}
+
+.valido{
+    color:green;
+    font-weight:bold;
+}
+
+.invalido{
+    color:red;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:8px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <h1>🛡️ Infinity Card Guard</h1>
+
+    <input
+        type="text"
+        id="cartao"
+        maxlength="25"
+        placeholder="Digite o número do cartão">
+
+    <button id="analisar">
+        Analisar Cartão
+    </button>
+
+    <div id="resultado" class="painel"></div>
+
+</div>
+
+<script>
+
+const btn = document.getElementById("analisar");
+
+btn.addEventListener("click", analisarCartao);
+
+function analisarCartao(){
+
+    let numero = document
+        .getElementById("cartao")
+        .value
+        .replace(/\D/g,'');
+
+    const resultado = document.getElementById("resultado");
+
+    if(numero.length < 13 || numero.length > 16){
+        resultado.innerHTML = `
+            <span class="invalido">
+                Número inválido. O cartão deve possuir entre 13 e 16 dígitos.
+            </span>
+        `;
+        return;
+    }
+
+    const valido = validarLuhn(numero);
+
+    const bandeira = identificarBandeira(numero);
+
+    const setor = identificarSetor(numero);
+
+    const banco = identificarBanco(numero);
+
+    resultado.innerHTML = `
+        <div class="${valido ? 'valido' : 'invalido'}">
+            Status: ${valido ? '✔ Cartão Válido' : '✖ Cartão Inválido'}
+        </div>
+
+        <div class="info">
+            <strong>Bandeira:</strong> ${bandeira}
+        </div>
+
+        <div class="info">
+            <strong>Categoria de Setor:</strong> ${setor}
+        </div>
+
+        <div class="info">
+            <strong>Banco Emissor:</strong> ${banco}
+        </div>
+
+        <div class="info">
+            <strong>IIN:</strong> ${numero.substring(0,8)}
+        </div>
+    `;
+}
+
+function validarLuhn(numero){
+
+    let soma = 0;
+    let dobrar = false;
+
+    for(let i = numero.length - 1; i >= 0; i--){
+
+        let digito = parseInt(numero[i]);
+
+        if(dobrar){
+
+            digito *= 2;
+
+            if(digito > 9){
+                digito -= 9;
+            }
+        }
+
+        soma += digito;
+
+        dobrar = !dobrar;
+    }
+
+    return soma % 10 === 0;
+}
+
+function identificarBandeira(numero){
+
+    if(numero.startsWith("4")){
+        return "Visa";
+    }
+
+    if(
+        numero.startsWith("51") ||
+        numero.startsWith("52") ||
+        numero.startsWith("53") ||
+        numero.startsWith("54") ||
+        numero.startsWith("55")
+    ){
+        return "Mastercard";
+    }
+
+    if(numero.startsWith("34") || numero.startsWith("37")){
+        return "American Express";
+    }
+
+    if(numero.startsWith("6011")){
+        return "Discover";
+    }
+
+    if(numero.startsWith("6362") ||
+       numero.startsWith("5067") ||
+       numero.startsWith("4576")){
+        return "Elo";
+    }
+
+    return "Não identificada";
+}
+
+function identificarSetor(numero){
+
+    const primeiroDigito = numero[0];
+
+    switch(primeiroDigito){
+
+        case "1":
+            return "Companhias Aéreas";
+
+        case "2":
+            return "Companhias Aéreas e Financeiras";
+
+        case "3":
+            return "Viagens e Entretenimento";
+
+        case "4":
+        case "5":
+            return "Instituições Financeiras";
+
+        case "6":
+            return "Comércio e Bancos";
+
+        case "7":
+            return "Petróleo e Transporte";
+
+        case "8":
+            return "Telecomunicações";
+
+        case "9":
+            return "Órgãos Governamentais";
+
+        default:
+            return "Desconhecido";
+    }
+}
+
+function identificarBanco(numero){
+
+    const bin = numero.substring(0,4);
+
+    switch(bin){
+
+        case "4111":
+            return "Banco Visa Teste";
+
+        case "5500":
+            return "Banco Mastercard Teste";
+
+        case "6362":
+            return "Banco Elo Brasil";
+
+        case "6011":
+            return "Discover Financial";
+
+        case "3782":
+            return "American Express";
+
+        default:
+            return "Banco não identificado";
+    }
+}
+
+</script>
+
+</body>
+</html>
