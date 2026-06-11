@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Introdução a Componentes com JS</title>
+</head>
+<body>
+
+    <!-- A única div solicitada -->
+    <div class="root"></div>
+
+    <script>
+        function criarTitulo(texto) {
+            return "<h1 class=''>" + texto + "</h1>";
+        }
+
+        function criarParagrafo(texto) {
+            return "<p class='texto-destaque'>" + texto + "</p>";
+        }
+
+        function criarBotao(texto) {
+            return "<button class='botao-acao' onclick='alert(\"Botão clicado!\")'>" + texto + "</button>";
+        }
+
+        function renderizarPagina() {
+            var htmlFinal = criarTitulo("Bem-vindo ao Site!") + 
+                            criarParagrafo("Este é um exemplo simples de componentes com JS.") + 
+                            criarBotao("Clique Aqui");
+
+            var divRoot = document.querySelector(".root");
+            divRoot.innerHTML = htmlFinal;
+        }
+
+        renderizarPagina();
+    </script>
+
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .root {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .texto-destaque {
+        color: #666666;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .botao-acao {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .botao-acao:hover {
+        background-color: #0056b3;
+    }
+</style>
