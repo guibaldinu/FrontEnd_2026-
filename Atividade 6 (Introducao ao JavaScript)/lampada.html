@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Momento da Mágica?</h2>
+
+<p>Quantos cliques são necessários para acender uma lâmpada?</p>
+
+<button onclick="acender()">Turn on the light</button>
+
+<br><br>
+<span id="myImage" style="font-size: 100px;">🔦</span>
+
+<br><br>
+<button onclick="apagar()">Turn off the light</button>
+
+<script>
+    function acender() {
+        document.getElementById('myImage').innerHTML = '💡';
+    }
+
+    function apagar() {
+        document.getElementById('myImage').innerHTML = '🔦';
+    }
+</script>
+
+</body>
+</html>
