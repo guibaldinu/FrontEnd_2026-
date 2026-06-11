@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tarefas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .todo-app {
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-app">
+        <h2>Lista de Tarefas</h2>
+        <input type="text" id="taskInput" placeholder="Adicione uma nova tarefa">
+        <button onclick="addTask()">Adicionar</button>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const texto = input.value.trim();
+            if (!texto) return;
+
+            const li = document.createElement('li');
+
+            const span = document.createElement('span');
+            span.textContent = texto;
+            span.style.cursor = 'pointer';
+            span.onclick = function() {
+                li.classList.toggle('completed');
+            };
+
+            const btn = document.createElement('button');
+            btn.textContent = '✕';
+            btn.className = 'btn-delete';
+            btn.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(span);
+            li.appendChild(btn);
+            document.getElementById('taskList').appendChild(li);
+
+            input.value = '';
+            input.focus();
+        }
+
+        document.getElementById('taskInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') addTask();
+        });
+    </script>
+</body>
+</html>
