@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 { color: #2c3e50; margin-bottom: 8px; }
+        p  { color: #888; font-size: 14px; margin-bottom: 28px; }
+        .campos {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .campo {
+            flex: 1;
+            text-align: center;
+        }
+        .campo label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        .campo input {
+            width: 100%;
+            padding: 14px;
+            font-size: 22px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .campo input:focus {
+            border-color: #e67e22;
+            outline: none;
+        }
+        .seta {
+            font-size: 28px;
+            color: #e67e22;
+            font-weight: bold;
+        }
+        .formula {
+            margin-top: 24px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🌡️ Conversor de Temperatura</h1>
+        <p>Digite em qualquer campo — a conversão acontece em tempo real.</p>
+
+        <div class="campos">
+            <div class="campo">
+                <label>°C</label>
+                <input type="number" id="celsius" step="0.1" placeholder="Celsius" oninput="celsiusToFahrenheit()">
+            </div>
+            <div class="seta">⇌</div>
+            <div class="campo">
+                <label>°F</label>
+                <input type="number" id="fahrenheit" step="0.1" placeholder="Fahrenheit" oninput="fahrenheitToCelsius()">
+            </div>
+        </div>
+
+        <div class="formula">
+            <strong>F = (C × 9/5) + 32</strong> &nbsp;|&nbsp; <strong>C = (F − 32) × 5/9</strong>
+        </div>
+    </div>
+
+    <script>
+        function celsiusToFahrenheit() {
+            const c = parseFloat(document.getElementById('celsius').value);
+            document.getElementById('fahrenheit').value = isNaN(c) ? '' : ((c * 9 / 5) + 32).toFixed(2);
+        }
+
+        function fahrenheitToCelsius() {
+            const f = parseFloat(document.getElementById('fahrenheit').value);
+            document.getElementById('celsius').value = isNaN(f) ? '' : ((f - 32) * 5 / 9).toFixed(2);
+        }
+    </script>
+</body>
+</html>

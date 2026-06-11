@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Bank — Crédito para Festas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 440px;
+            width: 100%;
+        }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 6px; }
+        .sub { text-align: center; color: #888; font-size: 13px; margin-bottom: 28px; }
+        label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 14px;
+            margin-bottom: 4px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus { border-color: #2c3e50; outline: none; }
+        button {
+            margin-top: 22px;
+            width: 100%;
+            padding: 12px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #1a252f; }
+        #resultado { margin-top: 24px; display: none; }
+        .linha {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+        .linha:last-child { border-bottom: none; }
+        .desconto { color: #27ae60; }
+        .total {
+            margin-top: 8px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 14px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 17px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎉 Infinity Bank</h1>
+        <p class="sub">Crédito para Festas & Eventos</p>
+
+        <label>Pacote</label>
+        <select id="pacote">
+            <option value="50">Standard — R$ 50,00 por pessoa</option>
+            <option value="80">Premium — R$ 80,00 por pessoa</option>
+            <option value="120">Infinity Deluxe — R$ 120,00 por pessoa</option>
+        </select>
+
+        <label>Quantidade de Pessoas</label>
+        <input type="number" id="pessoas" min="1" placeholder="Ex: 80">
+
+        <button onclick="calcularOrcamento()">Calcular Orçamento</button>
+
+        <div id="resultado">
+            <div class="linha"><span>Custo Bruto</span>        <strong id="rBruto"></strong></div>
+            <div class="linha"><span>Taxa de Serviço (10%)</span><strong id="rTaxa"></strong></div>
+            <div class="linha" id="linhaDesconto" style="display:none">
+                <span class="desconto">Desconto Fidelidade (5%)</span>
+                <strong class="desconto" id="rDesconto"></strong>
+            </div>
+            <div class="total"><span>Total Final</span><span id="rTotal"></span></div>
+        </div>
+    </div>
+
+    <script>
+        function calcularOrcamento() {
+            const valorPorPessoa = parseFloat(document.getElementById('pacote').value);
+            const pessoas        = parseInt(document.getElementById('pessoas').value);
+
+            if (!pessoas || pessoas < 1) {
+                alert('Informe um número válido de pessoas.');
+                return;
+            }
+
+            const custoBruto = valorPorPessoa * pessoas;
+            const taxa       = custoBruto * 0.10;
+            const subtotal   = custoBruto + taxa;
+            const desconto   = pessoas > 100 ? subtotal * 0.05 : 0;
+            const total      = subtotal - desconto;
+
+            document.getElementById('rBruto').textContent   = 'R$ ' + custoBruto.toFixed(2);
+            document.getElementById('rTaxa').textContent    = 'R$ ' + taxa.toFixed(2);
+            document.getElementById('rTotal').textContent   = 'R$ ' + total.toFixed(2);
+
+            const linhaDesconto = document.getElementById('linhaDesconto');
+            if (desconto > 0) {
+                document.getElementById('rDesconto').textContent = '− R$ ' + desconto.toFixed(2);
+                linhaDesconto.style.display = 'flex';
+            } else {
+                linhaDesconto.style.display = 'none';
+            }
+
+            document.getElementById('resultado').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

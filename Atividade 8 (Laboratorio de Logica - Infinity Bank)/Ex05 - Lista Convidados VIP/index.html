@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Bank — Lista VIP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 6px; }
+        .sub { text-align: center; color: #888; font-size: 13px; margin-bottom: 28px; }
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        input[type="text"]:focus { border-color: #2c3e50; outline: none; }
+        button.btn-add {
+            padding: 10px 18px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        button.btn-add:hover { background-color: #1a252f; }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        li:last-child { border-bottom: none; }
+        .nome {
+            flex: 1;
+            font-size: 15px;
+            color: #2c3e50;
+        }
+        .nome.presente {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .btn-acao {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .btn-concluir { background-color: #d4edda; color: #155724; }
+        .btn-editar   { background-color: #cce5ff; color: #004085; }
+        .btn-excluir  { background-color: #f8d7da; color: #721c24; }
+        .vazio {
+            text-align: center;
+            color: #bbb;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>👥 Infinity Bank</h1>
+        <p class="sub">Lista de Convidados VIP</p>
+
+        <div class="input-row">
+            <input type="text" id="nomeInput" placeholder="Nome do convidado..."
+                   onkeydown="if(event.key==='Enter') addConvidado()">
+            <button class="btn-add" onclick="addConvidado()">+ Adicionar</button>
+        </div>
+
+        <ul id="lista">
+            <li class="vazio" id="vazio">Nenhum convidado adicionado.</li>
+        </ul>
+    </div>
+
+    <script>
+        let convidados = [];
+
+        function addConvidado() {
+            const input = document.getElementById('nomeInput');
+            const nome  = input.value.trim();
+            if (!nome) return;
+
+            convidados.push({ id: Date.now(), nome: nome, presente: false });
+            input.value = '';
+            input.focus();
+            renderLista();
+        }
+
+        function concluir(id) {
+            const c = convidados.find(c => c.id === id);
+            if (c) c.presente = !c.presente;
+            renderLista();
+        }
+
+        function editar(id) {
+            const c    = convidados.find(c => c.id === id);
+            if (!c) return;
+            const novo = prompt('Editar nome:', c.nome);
+            if (novo && novo.trim()) {
+                c.nome = novo.trim();
+                renderLista();
+            }
+        }
+
+        function excluir(id) {
+            convidados = convidados.filter(c => c.id !== id);
+            renderLista();
+        }
+
+        function renderLista() {
+            const lista = document.getElementById('lista');
+            const vazio = document.getElementById('vazio');
+            lista.innerHTML = '';
+
+            if (convidados.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'vazio';
+                li.id = 'vazio';
+                li.textContent = 'Nenhum convidado adicionado.';
+                lista.appendChild(li);
+                return;
+            }
+
+            convidados.forEach(c => {
+                const li = document.createElement('li');
+
+                const span = document.createElement('span');
+                span.className = 'nome' + (c.presente ? ' presente' : '');
+                span.textContent = c.nome;
+
+                const btnConcluir = document.createElement('button');
+                btnConcluir.className = 'btn-acao btn-concluir';
+                btnConcluir.textContent = c.presente ? 'Desfazer' : 'Concluir';
+                btnConcluir.onclick = () => concluir(c.id);
+
+                const btnEditar = document.createElement('button');
+                btnEditar.className = 'btn-acao btn-editar';
+                btnEditar.textContent = 'Editar';
+                btnEditar.onclick = () => editar(c.id);
+
+                const btnExcluir = document.createElement('button');
+                btnExcluir.className = 'btn-acao btn-excluir';
+                btnExcluir.textContent = 'Excluir';
+                btnExcluir.onclick = () => excluir(c.id);
+
+                li.appendChild(span);
+                li.appendChild(btnConcluir);
+                li.appendChild(btnEditar);
+                li.appendChild(btnExcluir);
+                lista.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
